@@ -24,7 +24,8 @@
         }
 
         .hero-bg {
-            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 1)), url('https://placehold.co/1920x1080/000000/FFFFFF?text=Imagem+de+Fundo+Estilizada') no-repeat center center;
+            /* Mantenha a referência local para a imagem de fundo que você configurou */
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 1)), url('Imagens/Foto de Fundo.jpeg') no-repeat center center;
             background-size: cover;
         }
 
@@ -40,6 +41,48 @@
                 transform: translateY(-8px);
                 box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.1), 0 4px 6px -2px rgba(251, 191, 36, 0.05);
             }
+
+        /* ANIMAÇÕES ADICIONADAS */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 1rem rgba(251, 191, 36, 0.3), 0 0 0.5rem rgba(0,0,0,0.5);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 2rem rgba(251, 191, 36, 0.5), 0 0 1rem rgba(0,0,0,0.5);
+            }
+        }
+
+        .animate-slide-in {
+            opacity: 0; /* Começa invisível */
+            animation: slideInFromLeft 0.8s ease-out forwards;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        .delay-600 {
+            animation-delay: 600ms;
+        }
+
+        .btn-pulsing {
+            animation: pulse 2.5s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="text-gray-300">
@@ -71,12 +114,15 @@
 
     <main>
         <!-- Seção Hero -->
-        <section class="hero-bg min-h-screen flex items-center justify-center text-center pt-20">
+        <section class="hero-bg min-h-screen flex items-center justify-center text-center pt-20 overflow-hidden">
             <div class="container mx-auto px-4">
-                <h1 class="text-6xl md:text-8xl lg:text-9xl text-white font-extrabold tracking-widest text-glow">VOZ DA SEGURANÇA</h1>
-                <p class="text-xl md:text-2xl text-amber-400 mt-4 max-w-3xl mx-auto tracking-wider">Onde a experiência em campo se torna conhecimento. Debates reais com quem vive a segurança pública.</p>
-                <div class="mt-10">
-                    <a href="#" class="bg-amber-500 text-gray-900 hover:bg-amber-400 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-amber-500/20">
+                <!-- Título principal com animação -->
+                <h1 class="text-6xl md:text-8xl lg:text-9xl text-white font-extrabold tracking-widest text-glow animate-slide-in">VOZ DA SEGURANÇA</h1>
+                <!-- Subtítulo com animação e atraso -->
+                <p class="text-xl md:text-2xl text-amber-400 mt-4 max-w-3xl mx-auto tracking-wider animate-slide-in delay-300">Onde a experiência em campo se torna conhecimento. Debates reais com quem vive a segurança pública.</p>
+                <div class="mt-10 animate-slide-in delay-600">
+                    <!-- Botão ATUALIZADO com animação de pulso -->
+                    <a href="#" class="bg-amber-500 text-gray-900 hover:bg-amber-400 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform btn-pulsing">
                         <i class="fas fa-play mr-2"></i> OUÇA O ÚLTIMO EPISÓDIO
                     </a>
                 </div>
@@ -98,7 +144,7 @@
                         </p>
                     </div>
                     <div class="order-1 md:order-2 flex justify-center">
-                        <img src="https://placehold.co/500x500/374151/FFFFFF?text=Foto+do+Est%C3%BAdio" alt="Estúdio do Podcast Voz da Segurança" class="rounded-lg shadow-2xl shadow-black/50 w-full max-w-md object-cover card-hover">
+                        <img src="Imagens/Subtenentes e Sargentos.png" alt="Estúdio do Podcast Voz da Segurança" class="rounded-lg shadow-2xl shadow-black/50 w-full max-w-md object-cover card-hover">
                     </div>
                 </div>
             </div>
@@ -164,11 +210,15 @@
                 <p class="max-w-2xl mx-auto text-gray-400 mb-12">Agradecemos às empresas que acreditam na nossa missão e apoiam o Voz da Segurança.</p>
                 <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
                     <!-- Logos dos patrocinadores -->
-                    <img src="https://placehold.co/200x100/4B5563/FFFFFF?text=LOGO+PATROCINADOR" alt="Logo Patrocinador 1" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                    <img src="https://placehold.co/200x100/4B5563/FFFFFF?text=LOGO+PATROCINADOR" alt="Logo Patrocinador 2" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                    <img src="https://placehold.co/200x100/4B5563/FFFFFF?text=LOGO+PATROCINADOR" alt="Logo Patrocinador 3" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                    <img src="https://placehold.co/200x100/4B5563/FFFFFF?text=LOGO+PATROCINADOR" alt="Logo Patrocinador 4" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                    <img src="https://placehold.co/200x100/4B5563/FFFFFF?text=LOGO+PATROCINADOR" alt="Logo Patrocinador 5" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="Imagens/IBCM 1.png" title="IBCM" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="Imagens/Open Way 2.png" title="Open Way" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                    <img src="" title="Cuias Nossa Senhora Aparecida" class="h-16 md:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300">
                 </div>
             </div>
         </section>
@@ -209,3 +259,4 @@
     </script>
 </body>
 </html>
+
