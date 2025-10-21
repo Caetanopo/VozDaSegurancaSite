@@ -96,10 +96,29 @@
                 <nav class="flex space-x-8 text-sm tracking-wider">
                     <a href="#sobre" class="hover:text-amber-400 transition-colors duration-300">SOBRE</a>
                     <a href="#programas" class="hover:text-amber-400 transition-colors duration-300">PROGRAMAS</a>
-                    <a href="#cortes" class="hover:text-amber-400 transition-colors duration-300">CORTES</a>
+                    <a href="#cortes" class="hover:text-amber-400 transition-colors duration-300">ÚLTIMO VÍDEO</a>
                     <a href="#patrocinadores" class="hover:text-amber-400 transition-colors duration-300">PATROCINADORES</a>
                     <a href="#apoio" class="hover:text-amber-400 transition-colors duration-300">SEGURANÇA</a>
                 </nav>
+                <!-- Ícones de Redes Sociais no Header -->
+                <div class="flex items-center space-x-6 border-l border-gray-700 pl-6">
+                    <a href="https://www.youtube.com/@canalvozdaseguranca" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-amber-400 transition-colors duration-300">
+                        <i class="fab fa-youtube text-2xl"></i>
+                        <span class="text-xs mt-1">YouTube</span>
+                    </a>
+                    <a href="https://www.instagram.com/vozdaseguranca" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-amber-400 transition-colors duration-300">
+                        <i class="fab fa-instagram text-2xl"></i>
+                        <span class="text-xs mt-1">Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@vozdaseguranca" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-amber-400 transition-colors duration-300">
+                        <i class="fab fa-tiktok text-2xl"></i>
+                        <span class="text-xs mt-1">TikTok</span>
+                    </a>
+                    <a href="https://www.facebook.com/vozdaseguranca" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-amber-400 transition-colors duration-300">
+                        <i class="fab fa-facebook text-2xl"></i>
+                        <span class="text-xs mt-1">Facebook</span>
+                    </a>
+                </div>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-2xl">
                 <i class="fas fa-bars"></i>
@@ -109,10 +128,19 @@
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 divide-y divide-gray-800">
             <a href="#sobre" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">SOBRE</a>
             <a href="#programas" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">PROGRAMAS</a>
-            <a href="#cortes" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">CORTES</a>
+            <a href="#cortes" class="hover:text-amber-400 transition-colors duration-300">ÚLTIMO VÍDEO</a>
             <a href="#patrocinadores" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">PATROCINADORES</a>
             <a href="#apoio" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">SEGURANÇA</a>
-            <a href="#redes" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">CONTATO</a>
+            <a href="#redes" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">REDES SOCIAIS</a>
+            <!-- Redes Sociais no Menu Mobile -->
+            <div class="py-4">
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.youtube.com/@canalvozdaseguranca" target="_blank" rel="noopener noreferrer" class="text-2xl text-gray-400 hover:text-amber-400"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/vozdaseguranca" target="_blank" rel="noopener noreferrer" class="text-2xl text-gray-400 hover:text-amber-400"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@vozdaseguranca" target="_blank" rel="noopener noreferrer" class="text-2xl text-gray-400 hover:text-amber-400"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/vozdaseguranca" target="_blank" rel="noopener noreferrer" class="text-2xl text-gray-400 hover:text-amber-400"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -140,7 +168,7 @@
                 </div>
 
                 <div class="mt-10 animate-slide-in delay-600">
-                    <a href="https://www.youtube.com/@canalvozdaseguranca/live" target="_blank" rel="noopener noreferrer" class="bg-amber-500 text-gray-900 hover:bg-amber-400 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform btn-pulsing">
+                    <a href="https://www.youtube.com/@canalvozdaseguranca/streams" target="_blank" rel="noopener noreferrer" class="bg-amber-500 text-gray-900 hover:bg-amber-400 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform btn-pulsing">
                         <i class="fas fa-play mr-2"></i> NOS ASSISTA AGORA
                     </a>
                 </div>
@@ -237,10 +265,10 @@
             </div>
         </section>
 
-        <!-- Seção Cortes -->
+        <!-- Seção Último Vídeo -->
         <section id="cortes" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6 lg:px-8 text-center">
-                <h2 class="text-5xl text-white tracking-wider mb-12">Última Live</h2>
+                <h2 class="text-5xl text-white tracking-wider mb-12">Último Vídeo</h2>
                 <div class="flex justify-center">
                     <!-- Coluna YouTube Centralizada -->
                     <div class="w-full max-w-4xl">
@@ -384,16 +412,16 @@
                 if (data.items && data.items.length > 0) {
                     const videoId = data.items[0].id.videoId;
                     videoContainer.innerHTML = `
-                                                                <iframe
-                                                                  width="100%"
-                                                                  height="400"
-                                                                  src="https://www.youtube.com/embed/${videoId}"
-                                                                  title="Último vídeo do canal"
-                                                                  frameborder="0"
-                                                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                  allowfullscreen>k
-                                                                </iframe>
-                                                              `;
+                                                                    <iframe
+                                                                      width="100%"
+                                                                      height="400"
+                                                                      src="https://www.youtube.com/embed/${videoId}"
+                                                                      title="Último vídeo do canal"
+                                                                      frameborder="0"
+                                                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                      allowfullscreen>k
+                                                                    </iframe>
+                                                                  `;
                 } else {
                     videoContainer.innerHTML = '<p>Nenhum vídeo recente encontrado.</p>';
                 }
