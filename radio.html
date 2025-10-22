@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rádio Web - Voz da Segurança</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Bebas Neue e Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .player-container {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-play-pause {
+            transition: all 0.3s ease;
+        }
+
+            .btn-play-pause:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+            }
+    </style>
+</head>
+<body class="text-gray-300 bg-cover bg-center bg-fixed" style="background-image: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 1)), url('Imagens/Foto de Fundo.jpeg');">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+
+        <div class="player-container w-full max-w-md p-8 rounded-2xl shadow-2xl border border-gray-700/50 text-center">
+
+            <a href="index.html" class="text-amber-400 hover:text-amber-300 absolute top-4 left-4 text-sm transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar ao Site
+            </a>
+
+            <img src="Imagens/logo transparente.png" alt="Logo Voz da Segurança" class="w-32 h-32 mx-auto mb-6 rounded-full shadow-lg">
+
+            <h1 class="text-4xl text-white tracking-wider">RÁDIO VOZ DA SEGURANÇA</h1>
+            <p class="text-amber-400 mt-1">A sua frequência de informação.</p>
+
+            <!-- Visualizador de Áudio -->
+            <canvas id="visualizer" class="w-full h-24 mt-8 mb-4"></canvas>
+
+            <div class="mt-4">
+                <h2 class="text-2xl text-white tracking-wider" id="on-air-title">NO AR AGORA</h2>
+                <p class="text-gray-400 text-lg" id="on-air-program">Programa Voz da Segurança</p>
+            </div>
+
+            <!-- Player de Áudio -->
+            <audio id="audioPlayer" preload="none" class="hidden">
+                <!-- IMPORTANTE: Substitua a URL abaixo pela URL do seu streaming de rádio -->
+                <source src="https://caminho.do.seu/streaming" type="audio/mpeg">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+
+            <!-- Controles -->
+            <div class="flex items-center justify-center space-x-6 mt-8">
+                <button id="playPauseBtn" class="btn-play-pause bg-amber-500 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-lg">
+                    <i id="playIcon" class="fas fa-play"></i>
+                    <i id="pauseIcon" class="fas fa-pause hidden"></i>
+                </button>
+            </div>
+
+            <!-- Controle de Volume -->
+            <div class="flex items-center justify-center space-x-3 mt-8 w-full max-w-xs mx-auto">
+                <i class="fas fa-volume-down text-gray-400"></i>
+                <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.8" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                <i class="fas fa-volume-up text-gray-400"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const volumeControl = document.getElementById('volumeControl');
+        const canvas = document.getElementById('visualizer');
+        const canvasCtx = canvas.getContext('2d');
+
+        let audioContext;
+        let analyser;
+        let source;
+        let dataArray;
+        let bufferLength;
+
+        function setupAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                source = audioContext.createMediaElementSource(audioPlayer);
+
+                source.connect(analyser);
+                analyser.connect(audioContext.destination);
+
+                analyser.fftSize = 256;
+                bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+            }
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (!audioContext) {
+                setupAudioContext();
+            }
+            // Garante que o AudioContext seja iniciado por um gesto do usuário
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            const isPlaying = !audioPlayer.paused;
+            if (isPlaying) {
+                audioPlayer.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            } else {
+                audioPlayer.play().catch(e => console.error("Erro ao tocar áudio:", e));
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                draw();
+            }
+        });
+
+        volumeControl.addEventListener('input', (e) => {
+            audioPlayer.volume = e.target.value;
+        });
+
+        function draw() {
+            requestAnimationFrame(draw);
+            analyser.getByteFrequencyData(dataArray);
+
+            canvasCtx.fillStyle = '#111827'; // Cor de fundo do canvas
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const barWidth = (canvas.width / bufferLength) * 2.5;
+            let barHeight;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i] / 2;
+
+                const gradient = canvasCtx.createLinearGradient(0, canvas.height, 0, canvas.height - barHeight);
+                gradient.addColorStop(0, '#f59e0b'); // Ambar
+                gradient.addColorStop(1, '#fbbf24'); // Ambar mais claro
+
+                canvasCtx.fillStyle = gradient;
+                canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
+            }
+        }
+    </script>
+
+</body>
+</html>
