@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voz da Segurança - O Podcast</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='https://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙️</text></svg>">
+    <!-- ADICIONE ESTA LINHA ABAIXO -->
+    <link rel="icon" type="image/png" href="Imagens/logo transparente.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Bebas Neue e Inter -->
@@ -97,7 +98,7 @@
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <nav class="flex space-x-8 text-sm tracking-wider">
-                    <a href="radio.html" class="hover:text-amber-400 transition-colors duration-300 flex items-center"><i class="fas fa-broadcast-tower mr-1"></i>RÁDIO</a>
+                    <a href="https://player.hdradios.net/player-app-multi-plataforma/6892?app-multi=1762282379" class="hover:text-amber-400 transition-colors duration-300 flex items-center"><i class="fas fa-broadcast-tower mr-1"></i>RÁDIO</a>
                     <a href="#sobre" class="hover:text-amber-400 transition-colors duration-300">SOBRE</a>
                     <a href="#programas" class="hover:text-amber-400 transition-colors duration-300">PROGRAMAS</a>
                     <a href="#ultimaLive" class="hover:text-amber-400 transition-colors duration-300">ÚLTIMA LIVE</a>
@@ -130,7 +131,7 @@
         </div>
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900 divide-y divide-gray-800">
-            <a href="radio.html" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300"><i class="fas fa-broadcast-tower mr-1"></i>RÁDIO</a>
+            <a href="https://player.hdradios.net/player-app-multi-plataforma/6892?app-multi=1762282379" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300"><i class="fas fa-broadcast-tower mr-1"></i>RÁDIO</a>
             <a href="#sobre" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">SOBRE</a>
             <a href="#programas" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">PROGRAMAS</a>
             <a href="#ultimaLive" class="block text-center py-3 hover:bg-gray-800 transition-colors duration-300">ÚLTIMA LIVE</a>
@@ -173,7 +174,7 @@
                 </div>
 
                 <div class="mt-10 animate-slide-in delay-600">
-                    <a href="radio.html" target="_blank" rel="noopener noreferrer" class="bg-amber-500 text-gray-900 hover:bg-amber-400 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform btn-pulsing">
+                    <a href="https://player.hdradios.net/player-app-multi-plataforma/6892?app-multi=1762282379" target="_blank" rel="noopener noreferrer" class="bg-amber-500 text-gray-900 hover:bg-amber-400 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform btn-pulsing">
                         <i class="fas fa-play mr-2"></i> NOS OUÇA AGORA
                     </a>
                 </div>
@@ -404,27 +405,22 @@
         // SCRIPT PARA BUSCAR A ÚLTIMA LIVE (AO VIVO OU CONCLUÍDA)
         async function fetchLatestYouTubeVideo() {
 
-            const apiKey = 'SUA_CHAVE_API_VAI_AQUI'; // <<< COLOQUE SUA CHAVE AQUI
-            const channelId = 'UCZFMpsLeq3zGZ-Z6l36Nl3A'; // ID do seu canal
+            const apiKey = 'AIzaSyBR5DGzMsCdzX58lgckOuRbE-YnNQVpWO4'; // API key criada pelo Buri
+            const channelId = 'UCZFhP6Qd1zJ3iGSNBZ8sH1w'; // ID do seu canal
             const videoContainer = document.getElementById('youtube-latest-video');
-
-            if (!apiKey) {
-                videoContainer.innerHTML = '<p class="text-sm text-center p-4">Por favor, configure uma chave de API do YouTube para carregar o vídeo dinamicamente.</p>';
-                return;
-            }
 
             // Função interna para renderizar o vídeo
             const renderVideo = (videoId) => {
                 if (videoId) {
                     const videoContainerInnerHtml = `
-                        <iframe
-                          src="https://www.youtube.com/embed/${videoId}"
-                          title="Última Live do Voz da Segurança"
-                          frameborder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowfullscreen
-                          class="w-full h-full absolute top-0 left-0">
-                        </iframe>`;
+                            <iframe
+                              src="https://www.youtube.com/embed/${videoId}"
+                              title="Última Live do Voz da Segurança"
+                              frameborder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowfullscreen
+                              class="w-full h-full absolute top-0 left-0">
+                            </iframe>`;
 
                     videoContainer.style.position = 'relative';
                     videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
