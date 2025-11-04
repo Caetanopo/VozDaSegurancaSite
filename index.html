@@ -400,66 +400,150 @@
             });
         }
 
-        // SCRIPT PARA BUSCAR ÚLTIMO VÍDEO DO YOUTUBE
-        // ===============================================
+
+        // SCRIPT PARA BUSCAR A ÚLTIMA LIVE (AO VIVO OU CONCLUÍDA)
         async function fetchLatestYouTubeVideo() {
 
-            const apiKey = 'AIzaSyBR5DGzMsCdzX58lgckOuRbE-YnNQVpWO4'; // API key criada pelo Buri
-            const channelId = 'UCZFhP6Qd1zJ3iGSNBZ8sH1w'; // ID do seu canal
+            const apiKey = 'SUA_CHAVE_API_VAI_AQUI'; // <<< COLOQUE SUA CHAVE AQUI
+            const channelId = 'UCZFMpsLeq3zGZ-Z6l36Nl3A'; // ID do seu canal
             const videoContainer = document.getElementById('youtube-latest-video');
 
-            if (apiKey === 'SUA_CHAVE_DE_API_AQUI' || !apiKey) {
+            if (!apiKey) {
                 videoContainer.innerHTML = '<p class="text-sm text-center p-4">Por favor, configure uma chave de API do YouTube para carregar o vídeo dinamicamente.</p>';
                 return;
             }
 
+            // Função interna para renderizar o vídeo
             const renderVideo = (videoId) => {
                 if (videoId) {
-                    videoContainer.innerHTML = `
-                            <iframe
-                                src="https://www.youtube.com/embed/${videoId}"
-                                title="Última live do Voz da Segurança"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen
-                                class="w-full h-full absolute top-0 left-0">
-                            </iframe>`;
-                    // Mantém a proporção do vídeo
+                    const videoContainerInnerHtml = `
+                        <iframe
+                          src="https://www.youtube.com/embed/${videoId}"
+                          title="Última Live do Voz da Segurança"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowfullscreen
+                          class="w-full h-full absolute top-0 left-0">
+                        </iframe>`;
+
                     videoContainer.style.position = 'relative';
                     videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
+                    videoContainer.innerHTML = videoContainerInnerHtml;
+
                 } else {
-                    videoContainer.innerHTML = '<p class="p-4">Nenhuma live recente encontrada.</p>';
+                    videoContainer.innerHTML = '<p class="p-4 text-center">Nenhuma live recente encontrada.</p>';
                 }
             };
 
             try {
-                // 1. Tenta buscar a live ATUAL
-                let liveUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&eventType=live&key=${apiKey}`;
+                // 1. Tenta buscar uma live AO VIVO AGORA
+                const liveUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&eventType=live&key=${apiKey}`;
                 let response = await fetch(liveUrl);
                 let data = await response.json();
 
                 if (data.items && data.items.length > 0) {
-                    // Se encontrar uma live ativa, mostra ela
-                    const videoId = data.items[0].id.videoId;
-                    renderVideo(videoId);
-                } else {
-                    // 2. Se não houver live ATUAL, busca a ÚLTIMA CONCLUÍDA
-                    let completedUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&eventType=completed&key=${apiKey}`;
-                    response = await fetch(completedUrl);
-                    data = await response.json();
-
-                    if (data.items && data.items.length > 0) {
-                        const videoId = data.items[0].id.videoId;
-                        renderVideo(videoId);
-                    } else {
-                        renderVideo(null); // Nenhuma live encontrada
-                    }
+                    // Achou uma live ao vivo! Renderiza e termina.
+                    renderVideo(data.items[0].id.videoId);
+                    return;
                 }
+
+                // 2. Nenhuma live ao vivo. Busca a ÚLTIMA LIVE CONCLUÍDA (ignorando Shorts)
+                // Primeiro, procura o vídeo LONGO (> 20 min) mais recente.
+                const completedUrlLong = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&videoDuration=long&key=${apiKey}`;
+                response = await fetch(completedUrlLong);
+                data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    // Achou a live longa mais recente! (Ex: "Papo Roxo")
+                    renderVideo(data.items[0].id.videoId);
+                    return;
+                }
+
+                // 3. Se não achou, procura o vídeo MÉDIO (4-20 min) mais recente.
+                // Isso pega lives mais curtas, mas ainda ignora Shorts (< 4 min).
+                const completedUrlMedium = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&videoDuration=medium&key=${apiKey}`;
+                response = await fetch(completedUrlMedium);
+                data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    // Achou uma live de duração média!
+                    renderVideo(data.items[0].id.videoId);
+                    return;
+                }
+
+                // 4. Se não achou nem ao vivo, nem longa, nem média, aí sim não há nada.
+                renderVideo(null);
+
             } catch (error) {
                 console.error('Erro ao buscar vídeo do YouTube:', error);
-                videoContainer.innerHTML = '<p class="p-4">Não foi possível carregar o vídeo. Tente novamente mais tarde.</p>';
+                renderVideo(null); // Mostra "Nenhuma live" em caso de erro
             }
         }
+
+        // Chama a função quando a página carrega
+        document.addEventListener('DOMContentLoaded', fetchLatestYouTubeVideo);
+
+
+        // SCRIPT PARA BUSCAR ÚLTIMO VÍDEO DO YOUTUBE
+        // ===============================================
+        //async function fetchLatestYouTubeVideo() {
+
+        //    const apiKey = 'AIzaSyBR5DGzMsCdzX58lgckOuRbE-YnNQVpWO4'; // API key criada pelo Buri
+        //    const channelId = 'UCZFhP6Qd1zJ3iGSNBZ8sH1w'; // ID do seu canal
+        //    const videoContainer = document.getElementById('youtube-latest-video');
+
+        //    if (!apiKey) {
+        //        videoContainer.innerHTML = '<p class="text-sm text-center p-4">Por favor, configure uma chave de API do YouTube para carregar o vídeo dinamicamente.</p>';
+        //        return;
+        //    }
+
+        //    const renderVideo = (videoId) => {
+        //        if (videoId) {
+        //            videoContainer.innerHTML = `
+        //                                    <iframe
+        //                                        src="https://www.youtube.com/embed/${videoId}"
+        //                                        title="Última live do Voz da Segurança"
+        //                                        frameborder="0"
+        //                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        //                                        allowfullscreen
+        //                                        class="w-full h-full absolute top-0 left-0">
+        //                                    </iframe>`;
+        //            // Mantém a proporção do vídeo
+        //            videoContainer.style.position = 'relative';
+        //            videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
+        //        } else {
+        //            videoContainer.innerHTML = '<p class="p-4">Nenhuma live recente encontrada.</p>';
+        //        }
+        //    };
+
+        //    try {
+        //        // 1. Tenta buscar a live ATUAL
+        //        let liveUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&eventType=live&key=${apiKey}`;
+        //        let response = await fetch(liveUrl);
+        //        let data = await response.json();
+
+        //        if (data.items && data.items.length > 0) {
+        //            // Se encontrar uma live ativa, mostra ela
+        //            const videoId = data.items[0].id.videoId;
+        //            renderVideo(videoId);
+        //        } else {
+        //            // 2. Se não houver live ATUAL, busca a ÚLTIMA CONCLUÍDA
+        //            let completedUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&type=video&eventType=completed&key=${apiKey}`;
+        //            response = await fetch(completedUrl);
+        //            data = await response.json();
+
+        //            if (data.items && data.items.length > 0) {
+        //                const videoId = data.items[0].id.videoId;
+        //                renderVideo(videoId);
+        //            } else {
+        //                renderVideo(null); // Nenhuma live encontrada
+        //            }
+        //        }
+        //    } catch (error) {
+        //        console.error('Erro ao buscar vídeo do YouTube:', error);
+        //        videoContainer.innerHTML = '<p class="p-4">Não foi possível carregar o vídeo. Tente novamente mais tarde.</p>';
+        //    }
+        //}
 
         //// SCRIPT PARA BUSCAR ÚLTIMO VÍDEO DO YOUTUBE
         //// ===============================================
