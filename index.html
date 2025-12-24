@@ -306,9 +306,6 @@
                     <a href="https://www.instagram.com/openwaypf/" target="_blank" rel="noopener noreferrer" class="block bg-white p-3 rounded-lg shadow-lg w-40 h-28 flex items-center justify-center card-hover">
                         <img src="Imagens/Open Way 2.png" title="Open Way" class="max-h-full max-w-full object-contain">
                     </a>
-                    <a href="https://www.instagram.com/jetskysolucoes/" target="_blank" rel="noopener noreferrer" class="block bg-white p-3 rounded-lg shadow-lg w-40 h-28 flex items-center justify-center card-hover">
-                        <img src="Imagens/Jetsky.png" title="Jetsky" class="max-h-full max-w-full object-contain">
-                    </a>
                     <a href="https://share.google/OTVTtFlXKhSgDOMd8" target="_blank" rel="noopener noreferrer" class="block bg-white p-3 rounded-lg shadow-lg w-40 h-28 flex items-center justify-center card-hover">
                         <img src="Imagens/Grey Pneus.png" title="Grey Pneus" class="max-h-full max-w-full object-contain">
                     </a>
@@ -413,14 +410,14 @@
             const renderVideo = (videoId) => {
                 if (videoId) {
                     const videoContainerInnerHtml = `
-                            <iframe
-                              src="https://www.youtube.com/embed/${videoId}"
-                              title="Última Live do Voz da Segurança"
-                              frameborder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowfullscreen
-                              class="w-full h-full absolute top-0 left-0">
-                            </iframe>`;
+                                <iframe
+                                  src="https://www.youtube.com/embed/${videoId}"
+                                  title="Última Live do Voz da Segurança"
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  allowfullscreen
+                                  class="w-full h-full absolute top-0 left-0">
+                                </iframe>`;
 
                     videoContainer.style.position = 'relative';
                     videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
