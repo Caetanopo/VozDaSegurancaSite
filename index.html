@@ -290,6 +290,23 @@
                         <p class="text-gray-300 mt-1">Quintas-feiras às 18:30H</p>
                     </a>
 
+                    <!-- NOVO: Escala Especial -->
+                    <div class="block bg-gray-800 p-6 rounded-lg card-hover flex flex-col items-center text-center cursor-default">
+                        <div class="w-40 h-40 rounded-full mb-4 border-4 border-gray-700 shadow-lg bg-gray-900 flex items-center justify-center">
+                            <i class="fas fa-microphone-alt text-6xl text-gray-500 opacity-80"></i>
+                        </div>
+                        <h3 class="text-2xl text-white tracking-wider">Apresentadores Variados</h3>
+                        <p class="text-amber-400 font-semibold mt-2">Escala Especial</p>
+                        <p class="text-gray-300 mt-1">Dias e Horários Variados</p>
+                    </div>
+
+                    <!-- NOVO: Em Breve -->
+                    <div class="block bg-gray-800/30 border-2 border-dashed border-gray-600 p-6 rounded-lg flex flex-col items-center justify-center text-center cursor-default transition-all duration-300 hover:bg-gray-800/50">
+                        <i class="fas fa-plus text-5xl text-gray-500 mb-4"></i>
+                        <h3 class="text-2xl text-gray-400 tracking-wider">Em Breve</h3>
+                        <p class="text-gray-500 font-semibold mt-2">Mais programas chegando...</p>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -445,14 +462,14 @@
             const renderVideo = (videoId) => {
                 if (videoId) {
                     const videoContainerInnerHtml = `
-                                        <iframe
-                                          src="https://www.youtube.com/embed/${videoId}"
-                                          title="Última Live do Voz da Segurança"
-                                          frameborder="0"
-                                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                          allowfullscreen
-                                          class="w-full h-full absolute top-0 left-0">
-                                        </iframe>`;
+                                            <iframe
+                                              src="https://www.youtube.com/embed/${videoId}"
+                                              title="Última Live do Voz da Segurança"
+                                              frameborder="0"
+                                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                              allowfullscreen
+                                              class="w-full h-full absolute top-0 left-0">
+                                            </iframe>`;
 
                     videoContainer.style.position = 'relative';
                     videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
@@ -528,14 +545,14 @@
         //    const renderVideo = (videoId) => {
         //        if (videoId) {
         //            videoContainer.innerHTML = `
-        //                                    <iframe
-        //                                        src="https://www.youtube.com/embed/${videoId}"
-        //                                        title="Última live do Voz da Segurança"
-        //                                        frameborder="0"
-        //                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        //                                        allowfullscreen
-        //                                        class="w-full h-full absolute top-0 left-0">
-        //                                    </iframe>`;
+        //                                        <iframe
+        //                                            src="https://www.youtube.com/embed/${videoId}"
+        //                                            title="Última live do Voz da Segurança"
+        //                                            frameborder="0"
+        //                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        //                                            allowfullscreen
+        //                                            class="w-full h-full absolute top-0 left-0">
+        //                                        </iframe>`;
         //            // Mantém a proporção do vídeo
         //            videoContainer.style.position = 'relative';
         //            videoContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
@@ -595,16 +612,16 @@
         //        if (data.items && data.items.length > 0) {
         //            const videoId = data.items[0].id.videoId;
         //            videoContainer.innerHTML = `
-        //                                                            <iframe
-        //                                                              width="100%"
-        //                                                              height="400"
-        //                                                              src="https://www.youtube.com/embed/${videoId}"
-        //                                                              title="Último vídeo do canal"
-        //                                                              frameborder="0"
-        //                                                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        //                                                              allowfullscreen>k
-        //                                                            </iframe>
-        //                                                          `;
+        //                                                                        <iframe
+        //                                                                            width="100%"
+        //                                                                            height="400"
+        //                                                                            src="https://www.youtube.com/embed/${videoId}"
+        //                                                                            title="Último vídeo do canal"
+        //                                                                            frameborder="0"
+        //                                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        //                                                                            allowfullscreen>k
+        //                                                                        </iframe>
+        //                                                                    `;
         //        } else {
         //            videoContainer.innerHTML = '<p>Nenhum vídeo recente encontrado.</p>';
         //        }
@@ -615,9 +632,8 @@
         //}
 
         // Chama a função quando a página carregar
-        document.addEventListener('DOMContentLoaded', fetchLatestYouTubeVideo);
+        // document.addEventListener('DOMContentLoaded', fetchLatestYouTubeVideo);
 
     </script>
 </body>
 </html>
-
