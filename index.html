@@ -87,6 +87,31 @@
         .btn-pulsing {
             animation: pulse 2.5s infinite ease-in-out;
         }
+
+        /* NOVO: Efeito de borda animada para o banner de aluguel */
+        .border-glow {
+            animation: borderPulse 3s infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% {
+                border-color: rgba(251, 191, 36, 0.3);
+            }
+
+            50% {
+                border-color: rgba(251, 191, 36, 0.8);
+            }
+        }
+
+        /* Ocultar scrollbar do carrossel mas manter a funcionalidade */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="text-gray-300">
@@ -189,7 +214,7 @@
             <div class="container mx-auto px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="order-1 md:order-1 flex justify-center">
-                        <a href="https://share.google/lgmMVOMHO73SLpxRl" target="_blank" rel="noopener noreferrer" class="block">
+                        <a href="https://share.google/lgmMVOMHO73SLpxRl" target="_blank" rel="noopener noreferrer" class="block relative group">
                             <img src="Imagens/imagem de fundo 3.png" alt="Foto do estúdio Voz da Segurança" class="rounded-lg shadow-2xl shadow-black/50 w-full max-w-md object-cover card-hover">
                         </a>
                     </div>
@@ -225,6 +250,116 @@
                             <img src="Imagens/Subtenentes e Sargentos.png" alt="Logo da ASSTBM" class="rounded-lg shadow-2xl shadow-black/50 w-full max-w-md object-cover card-hover">
                         </a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVO: Seção Aluguel do Estúdio -->
+        <section id="aluguel" class="py-20 bg-gray-800 relative overflow-hidden border-y-2 border-amber-500/20">
+            <!-- Ícone de fundo para textura -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none">
+                <i class="fas fa-podcast text-[30rem]"></i>
+            </div>
+
+            <div class="container mx-auto px-6 lg:px-8 relative z-10">
+                <div class="max-w-4xl mx-auto text-center bg-gray-900/80 backdrop-blur-sm p-10 md:p-14 rounded-2xl shadow-2xl border border-gray-700">
+                    <h2 class="text-5xl md:text-6xl text-amber-400 tracking-wider mb-6 font-['Bebas_Neue'] text-glow">
+                        TENHA O SEU PRÓPRIO PODCAST!
+                    </h2>
+                    <div class="w-32 h-1 bg-amber-400 mx-auto mb-8"></div>
+
+                    <p class="text-xl text-white mb-6 font-medium">
+                        Você tem uma ideia e quer tirar do papel?
+                    </p>
+
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl mx-auto">
+                        O nosso estúdio agora está <strong class="text-white">disponível para locação</strong>.
+                        Tenha acesso à nossa infraestrutura completa com ambiente climatizado, equipamentos de áudio profissionais,
+                        câmeras de alta resolução e iluminação ideal para gravar o seu projeto com qualidade de TV.
+                    </p>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-gray-400 text-sm">
+                        <div class="flex flex-col items-center bg-gray-800 p-4 rounded-lg">
+                            <i class="fas fa-microphone-alt text-2xl text-amber-500 mb-2"></i>
+                            <span>Áudio Pro</span>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-800 p-4 rounded-lg">
+                            <i class="fas fa-video text-2xl text-amber-500 mb-2"></i>
+                            <span>Vídeo Alta Resolução</span>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-800 p-4 rounded-lg">
+                            <i class="fas fa-lightbulb text-2xl text-amber-500 mb-2"></i>
+                            <span>Iluminação</span>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-800 p-4 rounded-lg">
+                            <i class="fas fa-couch text-2xl text-amber-500 mb-2"></i>
+                            <span>Conforto</span>
+                        </div>
+                    </div>
+
+                    <!-- NOVO: Carrossel de Imagens do Estúdio FLUIDO E ARRASTÁVEL -->
+                    <div class="relative w-full mb-10 group px-2 md:px-8">
+                        <!-- Container de scroll -->
+                        <div id="estudio-carousel" class="flex overflow-x-auto scrollbar-hide gap-4 pb-4 cursor-grab active:cursor-grabbing select-none">
+
+                            <!-- ITEM 1 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132049.jpg" alt="Foto do Estúdio 1" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 2 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132125.jpg" alt="Foto do Estúdio 2" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 3 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132131.jpg" alt="Foto do Estúdio 3" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 4 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132149.jpg" alt="Foto do Estúdio 4" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 5 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132236.jpg" alt="Foto do Estúdio 5" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 6 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132258.jpg" alt="Foto do Estúdio 6" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 7 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132305.jpg" alt="Foto do Estúdio 7" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 8 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132353.jpg" alt="Foto do Estúdio 8" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+
+                            <!-- ITEM 9 -->
+                            <div class="shrink-0 w-full sm:w-2/3 md:w-1/2 pointer-events-none">
+                                <img src="Imagens/Estudio/IMG_20260630_132402.jpg" alt="Foto do Estúdio 9" class="w-full h-56 md:h-72 object-cover rounded-xl border-2 border-gray-700 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                            </div>
+                        </div>
+
+                        <!-- Botões de Navegação Desktop -->
+                        <button onclick="scrollCarousel(-1)" class="absolute -left-2 md:-left-4 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-amber-500 text-amber-400 hover:text-gray-900 border border-gray-700 hover:border-amber-500 w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 hover:scale-110 shadow-lg">
+                            <i class="fas fa-chevron-left text-xl"></i>
+                        </button>
+                        <button onclick="scrollCarousel(1)" class="absolute -right-2 md:-right-4 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-amber-500 text-amber-400 hover:text-gray-900 border border-gray-700 hover:border-amber-500 w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 hover:scale-110 shadow-lg">
+                            <i class="fas fa-chevron-right text-xl"></i>
+                        </button>
+                    </div>
+
+                    <a href="https://wa.me/5554981092731?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20aluguel%20do%20est%C3%BAdio%20da%20Voz%20da%20Seguran%C3%A7a%20para%20gravar%20meu%20podcast." target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-amber-500 hover:bg-amber-400 text-gray-900 font-extrabold py-4 px-8 rounded-full text-xl transition-all duration-300 transform hover:scale-105 btn-pulsing shadow-[0_0_20px_rgba(251,191,36,0.4)]">
+                        <i class="fab fa-whatsapp text-3xl mr-3"></i> Consultar Valores e Agendas
+                    </a>
                 </div>
             </div>
         </section>
@@ -372,6 +507,9 @@
                     </a>
                     <a href="https://www.instagram.com/nescafe.3a/" target="_blank" rel="noopener noreferrer" class="block bg-white p-3 rounded-lg shadow-lg w-40 h-28 flex items-center justify-center card-hover">
                         <img src="Imagens/Nescafé 3A.png" title="3A Nescafé" class="max-h-full max-w-full object-contain">
+                    </a>
+                    <a href="https://www.instagram.com/colortintasfilial_passofundo/" target="_blank" rel="noopener noreferrer" class="block bg-white p-3 rounded-lg shadow-lg w-40 h-28 flex items-center justify-center card-hover">
+                        <img src="Imagens/color tintas.png" title="Color Tintas" class="max-h-full max-w-full object-contain">
                     </a>
                 </div>
             </div>
@@ -633,6 +771,52 @@
 
         // Chama a função quando a página carregar
         // document.addEventListener('DOMContentLoaded', fetchLatestYouTubeVideo);
+
+        // SCRIPT PARA O CARROSSEL DO ESTÚDIO (Scroll por botão)
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('estudio-carousel');
+            if (carousel) {
+                const scrollAmount = carousel.offsetWidth * 0.8;
+                carousel.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+            }
+        }
+
+        // SCRIPT PARA ARRASTAR O CARROSSEL COM O MOUSE (Drag to Scroll)
+        const carousel = document.getElementById('estudio-carousel');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        if (carousel) {
+            carousel.addEventListener('mousedown', (e) => {
+                isDown = true;
+                carousel.classList.add('active'); // Muda o cursor
+                // Pega a posição inicial do clique em relação ao elemento
+                startX = e.pageX - carousel.offsetLeft;
+                // Armazena a posição de rolagem atual
+                scrollLeft = carousel.scrollLeft;
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                isDown = false;
+                carousel.classList.remove('active');
+            });
+
+            carousel.addEventListener('mouseup', () => {
+                isDown = false;
+                carousel.classList.remove('active');
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if (!isDown) return; // Se não estiver clicado, não faz nada
+                e.preventDefault(); // Evita seleções de texto indesejadas
+                // Calcula o quanto o mouse moveu
+                const x = e.pageX - carousel.offsetLeft;
+                const walk = (x - startX) * 2; // Multiplicador para a velocidade do arrasto (2 = mais rápido)
+                // Atualiza o scroll
+                carousel.scrollLeft = scrollLeft - walk;
+            });
+        }
 
     </script>
 </body>
